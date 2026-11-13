@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<article class="article-page">
+  <a class="back-link" href="{{ '/' | relative_url }}">← All writing</a>
+  <header class="article-header">
+    <p class="post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="article-description">{{ page.description | escape }}</p>{% endif %}
+    {% if page.tags.size > 0 %}<ul class="tag-list" aria-label="Topics">{% for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}</ul>{% endif %}
+  </header>
+  <div class="article-content">{{ content }}</div>
+  <div class="article-end"><span aria-hidden="true">✳</span><a href="{{ '/' | relative_url }}">More writing</a></div>
+</article>

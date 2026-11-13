@@ -1,95 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>todcubed blog</title>
-    <meta
-      name="description"
-      content="A simple microblogging home for thoughts, experiments, and updates from todcubed."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="site-header">
-        <div class="brand-wrap">
-          <div class="brand-mark">t</div>
-          <div>
-            <p class="eyebrow">microblog</p>
-            <h1>todcubed</h1>
-          </div>
-        </div>
-        <nav class="top-nav" aria-label="Main navigation">
-          <a href="#posts">Posts</a>
-          <a href="#about">About</a>
-        </nav>
-      </header>
+---
+layout: default
+title: Writing
+---
+<section class="intro">
+  <p class="eyebrow">A small corner of the internet</p>
+  <h1>Thoughts in progress.<br><span>Notes from the journey.</span></h1>
+  <p class="intro-copy">Short updates, ideas, and experiments on things I’m learning and making.</p>
+</section>
 
-      <main>
-        <section class="hero">
-          <p class="kicker">now posting</p>
-          <h2>Short updates, ideas, and experiments.</h2>
-          <p class="hero-copy">
-            This is your home for quick thoughts, software notes, and tiny wins.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-btn" href="#posts">Read the latest</a>
-            <a class="secondary-btn" href="#about">About this blog</a>
-          </div>
-        </section>
+<section class="writing-section" aria-labelledby="writing-heading">
+  <div class="section-heading">
+    <div><p class="eyebrow">The journal</p><h2 id="writing-heading">Latest writing</h2></div>
+    <label class="search-box"><span class="visually-hidden">Search posts</span><span aria-hidden="true">⌕</span><input id="post-search" type="search" placeholder="Search posts" autocomplete="off"></label>
+  </div>
+  {% assign posts = site.posts %}
+  {% if posts.size > 0 %}
+  <div class="post-list" id="post-list">
+    {% for post in posts %}
+    <article class="post-card" data-search="{{ post.title | escape }} {{ post.excerpt | strip_html | escape }} {% for tag in post.tags %}{{ tag | escape }} {% endfor %}">
+      <div class="post-card-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time><span aria-hidden="true">·</span><span>{{ post.content | number_of_words | divided_by: 220 | plus: 1 }} min read</span></div>
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+      <p>{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 190 }}</p>
+      {% if post.tags.size > 0 %}<ul class="tag-list" aria-label="Topics">{% for tag in post.tags %}<li>{{ tag }}</li>{% endfor %}</ul>{% endif %}
+      <a class="read-link" href="{{ post.url | relative_url }}">Read post <span aria-hidden="true">→</span></a>
+    </article>
+    {% endfor %}
+  </div>
+  <p id="no-results" class="empty-state" hidden>No posts match that search. Try another word.</p>
+  {% else %}
+  <div class="empty-state"><p>No posts yet. Add a Markdown file in <code>_posts/</code> to publish your first one.</p></div>
+  {% endif %}
+</section>
 
-        <section id="posts" class="posts" aria-label="Blog posts">
-          <article class="post-card">
-            <div class="post-meta">
-              <span class="dot"></span>
-              <time datetime="2026-11-13">Nov 13, 2026</time>
-            </div>
-            <h3>Started the blog.</h3>
-            <p>
-              A fresh place to publish quick thoughts, product notes, and progress updates.
-              This is the first post and the beginning of a simple publishing habit.
-            </p>
-          </article>
-
-          <article class="post-card">
-            <div class="post-meta">
-              <span class="dot"></span>
-              <time datetime="2026-11-14">Nov 14, 2026</time>
-            </div>
-            <h3>Building in public.</h3>
-            <p>
-              Tiny experiments, real feedback, and the occasional useful lesson. The goal is
-              consistent output, not perfection.
-            </p>
-          </article>
-
-          <article class="post-card">
-            <div class="post-meta">
-              <span class="dot"></span>
-              <time datetime="2026-11-15">Nov 15, 2026</time>
-            </div>
-            <h3>Shipping the first version.</h3>
-            <p>
-              The website is live and ready for updates. More posts will follow as ideas land.
-            </p>
-          </article>
-        </section>
-
-        <section id="about" class="about-box">
-          <h3>About this space</h3>
-          <p>
-            This microblog is for short-form writing, project updates, and links worth sharing.
-            It’s intentionally lightweight and easy to keep moving.
-          </p>
-        </section>
-      </main>
-    </div>
-  </body>
-</html>
+<script>
+  (() => {
+    const input = document.getElementById('post-search');
+    const list = document.getElementById('post-list');
+    if (!input || !list) return;
+    const cards = [...list.querySelectorAll('.post-card')];
+    const empty = document.getElementById('no-results');
+    input.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach((card) => {
+        const match = card.dataset.search.toLowerCase().includes(query);
+        card.hidden = !match;
+        if (match) visible += 1;
+      });
+      empty.hidden = visible !== 0;
+    });
+  })();
+</script>

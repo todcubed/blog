@@ -1,0 +1,10 @@
+title: todcubed blog
+description: Short updates, ideas, and experiments from todcubed.
+url: https://todcubed.github.io
+baseurl: /blog
+lang: en
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

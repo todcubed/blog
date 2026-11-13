@@ -2,16 +2,16 @@
 layout: default
 title: Writing
 ---
-<section class="intro">
-  <p class="eyebrow">A small corner of the internet</p>
-  <h1>Thoughts in progress.<br><span>Notes from the journey.</span></h1>
-  <p class="intro-copy">Short updates, ideas, and experiments on things I’m learning and making.</p>
+<section class="hero">
+  <h1>todcubed</h1>
+  <p class="subtitle">Developer, Linux enthusiast, and low-level programming enthusiast.</p>
+  <p class="subtitle"><span class="prompt">todcubed@linux:~$</span> whoami</p>
 </section>
 
 <section class="writing-section" aria-labelledby="writing-heading">
   <div class="section-heading">
-    <div><p class="eyebrow">The journal</p><h2 id="writing-heading">Latest writing</h2></div>
-    <label class="search-box"><span class="visually-hidden">Search posts</span><span aria-hidden="true">⌕</span><input id="post-search" type="search" placeholder="Search posts" autocomplete="off"></label>
+    <div><h2 id="writing-heading" class="section-title">Writing</h2></div>
+    <label class="search-box"><span class="visually-hidden">Search posts</span><span aria-hidden="true">&gt;</span><input id="post-search" type="search" placeholder="search posts" autocomplete="off"></label>
   </div>
   {% assign posts = site.posts %}
   {% if posts.size > 0 %}

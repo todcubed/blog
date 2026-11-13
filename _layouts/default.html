@@ -3,30 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f7f5f0">
+    <meta name="theme-color" content="#000000">
     <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
     {% seo %}
     <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
     <link rel="alternate" type="application/atom+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
   </head>
   <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
-          <span class="brand-mark" aria-hidden="true">t</span>
-          <span><span class="brand-kicker">notes from</span><strong>todcubed</strong></span>
-        </a>
-        <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ '/' | relative_url }}">Writing</a>
-          <a href="{{ '/about/' | relative_url }}">About</a>
-          <a class="rss-link" href="{{ '/feed.xml' | relative_url }}">RSS <span aria-hidden="true">↗</span></a>
-        </nav>
-      </header>
-      <main id="main-content">{{ content }}</main>
-      <footer class="site-footer">
-        <span>Made thoughtfully by todcubed.</span>
-        <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
-      </footer>
-    </div>
+    <main>
+      <div class="container">
+        <div class="terminal">
+          <header class="terminal-header">
+            <span class="prompt">todcubed@linux:~$</span> ./blog
+            <nav class="site-nav" aria-label="Main navigation">
+              <a href="{{ '/' | relative_url }}">posts</a>
+              <a href="{{ '/about/' | relative_url }}">about</a>
+              <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+            </nav>
+          </header>
+          <div id="main-content">{{ content }}</div>
+          <footer class="site-footer">
+            <span>© {{ site.time | date: "%Y" }} todcubed</span>
+            <span class="prompt">todcubed@linux:~$ exit</span>
+          </footer>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

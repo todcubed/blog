@@ -58,25 +58,6 @@ I found that there's a preloaded Stock (AOSP) E-mail client on there. To open it
 
 However the file manager only allows selection of some ringtones and nothing else. But atleast we can see the files and the storage.
 
-***
-
-### Best discovery: Hidden app store / hidden launcher? 
-
-This is the best one so far, and it might actually be the beginning of something more interesting.
-
-- Open the **Silk Browser**
-- Open any **PDF file** or a link to a PDF (most webpages with PDF files work)
-- Click the **download icon** within the browser to download it
-- After download completes, **open the downloaded file**
-- When you do, the browser does a weird thing and opens a file picker / download manager interface
-- Then, if you hit **the back button** or navigate the file listing, you can access more of the underlying Android system / app framework than expected
-
-From there, you can sometimes access hidden app entries, system-level file views, and other menus that aren't normally exposed to the user. It feels like a soft-spot or a backdoor in the custom shell, not a full exploit by itself, but it does reveal more than Amazon intended.
-
-This is the most promising lead so far, because it suggests there are deeper Android surfaces still accessible through the browser and the file/download system.
-
-***
-
 ### Conclusion
 
 The Echo Show is definitely more like a locked-down Android device than a simple smart display. There are still hidden system apps and parts of the stock Android layer exposed through browser interactions and the download flow.

@@ -2,6 +2,8 @@
 
 A lightweight, searchable Jekyll blog published at <https://todcubed.github.io/blog/>.
 
+## CAUTION: The website is vibecoded. But the blog posts are written by me. 
+
 ## Publishing
 
 Posts are Markdown files in `_posts/`. Create a file named `YYYY-MM-DD-your-post-title.md` and add front matter at the top:
